@@ -68,8 +68,9 @@ def main():
             'latitude': [restaurante_info['latitude'], coord_persona[0]],
             'longitude': [restaurante_info['longitude'], coord_persona[1]],
             'icon_data': [
-                {"url": "https://cdn-icons-png.flaticon.com/512/684/684908.png", "width": 128, "height": 128, "anchorY": 128},
-                {"url": "C:/Users/jssaa/OneDrive/Documentos/sebastian saavedra/Maestria/Semestre 2024 02/NLP/Proyecto/placeholder.png", "width": 128, "height": 128, "anchorY": 128}
+                {"url": "https://cdn-icons-png.flaticon.com/512/1046/1046771.png", "width": 128, "height": 128, "anchorY": 128},
+                {"url": "https://cdn-icons-png.flaticon.com/512/2353/2353678.png", "width": 128, "height": 128, "anchorY": 128}
+
             ]
         })
 
