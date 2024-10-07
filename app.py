@@ -1,21 +1,15 @@
 import streamlit as st
 import pandas as pd
 import pydeck as pdk
+from Functions import funciones_proyecto
 
-def generate_stars(rating):
-    full_stars = int(rating)
-    half_star = 1 if (rating - full_stars >= 0.5) else 0
-    empty_stars = 5 - full_stars - half_star
-
-    stars_html = '<span style="color: gold;">'
-    stars_html += '<i class="fas fa-star"></i> ' * full_stars
-    stars_html += '<i class="fas fa-star-half-alt"></i> ' * half_star
-    stars_html += '<i class="far fa-star"></i> ' * empty_stars
-    stars_html += '</span>'
-    return stars_html
-
+n_top=5
+coord_persona=[4.628363, -74.064807]
 
 def main():
+    # Activacion funciones
+    funcion=funciones_proyecto()
+
     # Título y descripción con algo de estilo
     st.title('TastyMap - Sabor en Palabras')
     st.markdown("""
@@ -27,6 +21,8 @@ def main():
     resumen['latitude'] = resumen['latitude'].str.replace(',', '.').astype(float)
     resumen['longitude'] = resumen['longitude'].str.replace(',', '.').astype(float)
 
+    # Ordenar información y obtener top
+    resumen= funcion.top_ordenado(resumen,n_top,coord_persona=(coord_persona[0],coord_persona[1]) )
 
     # Selección de restaurante
     restaurantes = resumen["Restaurante"].tolist()
@@ -50,15 +46,13 @@ def main():
 
         # Calificación
         st.subheader("Calificación:")      
-        st.markdown(generate_stars(restaurante_info["Calificacion"]), unsafe_allow_html=True)
+        st.markdown(funcion.generate_stars(restaurante_info["Calificacion"]), unsafe_allow_html=True)
 
         # Review
         st.subheader("Más reviews:")
         st.markdown(f'<a href="{restaurante_info["Reviews"]}" class="link" target="_blank">Clic aquí para leer más reseñas</a>', unsafe_allow_html=True)
 
         # Mapa
-
-        coord_persona=[4.628363, -74.064807]
 
         st.subheader("Mapa de referencia")
         restaurante_coords = [restaurante_info['latitude'], restaurante_info['longitude']]
@@ -88,9 +82,6 @@ def main():
         view_state = pdk.ViewState(latitude=restaurante_info['latitude'], longitude=restaurante_info['longitude'], zoom=14)
 
         st.pydeck_chart(pdk.Deck(layers=[icon_layer], initial_view_state=view_state))
-
-
-
 
 if __name__ == "__main__":
     main()
