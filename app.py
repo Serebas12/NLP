@@ -3,7 +3,7 @@ import pandas as pd
 import pydeck as pdk
 from Functions import funciones_proyecto
 
-n_top=5
+n_top=30
 coord_persona=[4.628363, -74.064807]
 
 def main():
@@ -17,9 +17,9 @@ def main():
     """, unsafe_allow_html=True)
 
     # Cargar la información desde el archivo CSV
-    resumen = pd.read_csv("C:/Users/jssaa/OneDrive/Documentos/sebastian saavedra/Maestria/Semestre 2024 02/NLP/Proyecto/resumen_pruebas.csv", delimiter=";", encoding='latin1')
-    resumen['latitude'] = resumen['latitude'].str.replace(',', '.').astype(float)
-    resumen['longitude'] = resumen['longitude'].str.replace(',', '.').astype(float)
+    resumen = pd.read_csv("C:/Users/jssaa/OneDrive/Documentos/sebastian saavedra/Maestria/Semestre 2024 02/NLP/Proyecto/resumen_streamlit.csv", delimiter=";", encoding='utf8')
+    #resumen['latitude'] = resumen['latitude'].str.replace(',', '.').astype(float)
+    #resumen['longitude'] = resumen['longitude'].str.replace(',', '.').astype(float)
 
     # Ordenar información y obtener top
     resumen= funcion.top_ordenado(resumen,n_top,coord_persona=(coord_persona[0],coord_persona[1]) )
