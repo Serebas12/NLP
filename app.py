@@ -102,7 +102,7 @@ def main():
 
         # Encuesta
         st.subheader("Encuesta sobre uso de la herramienta")
-        st.markdown(f'<a href="{restaurante_info["Reviews"]}" class="link" target="_blank">Clic aquí para dejar tu reseña</a>', unsafe_allow_html=True)
+        st.markdown(f'<a href="https://forms.gle/Cxdu8cKqpN9xsXGt9" class="link" target="_blank">Clic aquí para dejar tu reseña</a>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
